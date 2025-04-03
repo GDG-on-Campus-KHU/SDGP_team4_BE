@@ -17,7 +17,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql # mysql의 데이터 raw상태. 현재 서버폴더를 루트로 기준으로 생성됨. 이거 git에 commit되면 안됨...
       - ./mysql/config:/etc/mysql/conf.d #
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/init/schema.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - testnet
 

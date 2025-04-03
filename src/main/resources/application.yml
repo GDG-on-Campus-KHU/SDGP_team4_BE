@@ -9,7 +9,7 @@ spring:
 
 spring:
   datasource:
-    url: jdbc:mysql://mysql:13306/gdg_db?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:13306/gdg_db?serverTimezone=UTC&characterEncoding=UTF-8
     username: team4
     password: gdg1234
     driver-class-name: com.mysql.cj.jdbc.Driver
