@@ -25,13 +25,15 @@ jobs:
         run: |
           cd ./src/main/resources
           touch ./application-dev.yml
-          echo "${{ secrets.application_YML }}" > ./application-dev.yml
+          echo "${{ secrets.YML }}" > ./application-dev.yml
         shell: bash
 
-      - name: Build with Gradle
+      - name: Upload docker-compose.yml
         run: |
-          chmod +x gradlew
-          ./gradlew clean bootJar
+          echo "${{ secrets.VM_SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+          scp -i private_key.pem ./docker-compose.yml ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:~/
+          rm -f private_key.pem
 
       - name: DockerFile build & push
         run: |

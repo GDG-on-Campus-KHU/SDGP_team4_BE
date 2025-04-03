@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  mysql:
+    image: mysql:8.0.33
+    platform: linux/amd64
+    container_name: gdg-mysql
+    restart: always
+    ports:
+      - 13306:3306 # 배포된 환경에서는 3306:3306
+    environment:
+      MYSQL_DATABASE: gdg_db
+      MYSQL_ROOT_PASSWORD: gdg1234
+      MYSQL_USER: team4
+      MYSQL_PASSWORD: gdg1234
+    volumes:
+      - ./mysql/data:/var/lib/mysql # mysql의 데이터 raw상태. 현재 서버폴더를 루트로 기준으로 생성됨. 이거 git에 commit되면 안됨...
+      - ./mysql/config:/etc/mysql/conf.d #
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - testnet
+
+  backend:
+    container_name: gdg-server
+    image: singsangssong/gdg_team4
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - mysql
+    networks:
+      - testnet
+
+networks:
+  testnet:
+    driver: bridge
