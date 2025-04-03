@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "${{ secrets.VM_SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
-          scp -o StrictHostKeyChecking=no -i private_key.pem ./src/resources/static/docker-compose.yml ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:~/
+          scp -o StrictHostKeyChecking=no -i private_key.pem ./src/main/resources/static/docker-compose.yml ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:~/
           rm -f private_key.pem
 
       - name: DockerFile build & push
