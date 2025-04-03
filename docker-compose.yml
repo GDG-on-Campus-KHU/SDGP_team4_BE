@@ -21,18 +21,18 @@ services:
     networks:
       - testnet
 
-  backend:
-    container_name: gdg-server
-    image: singsangssong/gdg_team4
-    expose:
-      - 8080
-    ports:
-      - 8080:8080
-    restart: always
-    depends_on:
-      - mysql
-    networks:
-      - testnet
+#  backend:
+#    container_name: gdg-server
+#    image: singsangssong/gdg_team4
+#    expose:
+#      - 8080
+#    ports:
+#      - 8080:8080
+#    restart: always
+#    depends_on:
+#      - mysql
+#    networks:
+#      - testnet
 
 networks:
   testnet:

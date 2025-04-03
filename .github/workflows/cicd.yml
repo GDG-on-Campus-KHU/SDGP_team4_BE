@@ -60,7 +60,13 @@ jobs:
             
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest
+            
             cd ~
             sudo docker-compose up -d
+            sudo docker run -d --name gdg-server \
+              --network testnet \
+              -p 8080:8080 \
+              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}:latest
+
             sudo docker image prune -f
       
