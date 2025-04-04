@@ -1,5 +1,6 @@
 package com.team4;
 
+import com.team4.global.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ public class TestController {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("healthy!🤣");
+        String loginMemberEmail = JwtService.getLoginMemberEmail();
+        return ResponseEntity.ok(loginMemberEmail + " is healthy!🤣");
     }
 }
