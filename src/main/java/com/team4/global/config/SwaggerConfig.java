@@ -17,6 +17,7 @@ import java.util.List;
 public class SwaggerConfig {
 
     @Bean
+    @Profile("default")
     public Server defaultServer() {
         return null;
     }
