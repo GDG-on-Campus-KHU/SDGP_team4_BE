@@ -12,7 +12,7 @@ public class TestController {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        String loginMemberEmail = JwtService.getLoginMemberEmail();
+        String loginMemberEmail = JwtService.getLoginMemberNickname();
         return ResponseEntity.ok(loginMemberEmail + " is healthy!🤣");
     }
 }

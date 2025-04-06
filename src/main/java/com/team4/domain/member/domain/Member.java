@@ -1,4 +1,4 @@
-package com.team4.domain.member.entity;
+package com.team4.domain.member.domain;
 
 import com.team4.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -14,20 +14,21 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long memberId;
 
-    private String email;
-
+    @Column(nullable = false, unique = true)
     private String nickname;
 
+    @Column(nullable = false)
     private String password;
 
+    // Ex: 경기도 수원시
+    @Column(nullable = false)
     private String region;
 
     private String refreshToken;
 
     @Builder
-    public Member(String email, String nickname, String password,
+    public Member(String nickname, String password,
                   String region, String refreshToken) {
-        this.email = email;
         this.nickname = nickname;
         this.password = password;
         this.region = region;

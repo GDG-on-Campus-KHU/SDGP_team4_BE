@@ -43,7 +43,7 @@ public class JwtService {
 
     private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
-    private static final String EMAIL_CLAIM = "email";
+    private static final String NICKNAME_CLAIM = "nickname";
     private static final String BEARER = "Bearer ";
 
     private SecretKey secretKey;
@@ -55,11 +55,11 @@ public class JwtService {
         secretKey = new SecretKeySpec(signature.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
-    public String createAccessToken(String email) {
+    public String createAccessToken(String nickname) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + accessTokenExpirationPeriod);
         return Jwts.builder()
-                .claim(EMAIL_CLAIM, email)
+                .claim(NICKNAME_CLAIM, nickname)
                 .subject(ACCESS_TOKEN_SUBJECT)
                 .issuedAt(now)
                 .expiration(validity)
@@ -129,7 +129,7 @@ public class JwtService {
             return Optional.ofNullable(
                     Jwts.parser().verifyWith(secretKey).build()
                             .parseSignedClaims(accessToken)
-                            .getPayload().get(EMAIL_CLAIM, String.class));
+                            .getPayload().get(NICKNAME_CLAIM, String.class));
         } catch (Exception e) {
             log.error("액세스 토큰이 유효하지 않습니다.");
             return Optional.empty();
@@ -147,8 +147,8 @@ public class JwtService {
     /**
      * RefreshToken DB 저장(업데이트)
      */
-    public void updateRefreshToken(String email, String refreshToken) {
-        memberRepository.findByEmail(email)
+    public void updateRefreshToken(String nickname, String refreshToken) {
+        memberRepository.findByNickname(nickname)
                 .ifPresentOrElse(
                         member -> {
                             member.updateRefreshToken(refreshToken);
@@ -172,7 +172,7 @@ public class JwtService {
         }
     }
 
-    public static String getLoginMemberEmail() {
+    public static String getLoginMemberNickname() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || authentication.getPrincipal() == null) {
@@ -182,7 +182,7 @@ public class JwtService {
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername(); // 유저 이메일 반환
+            return ((UserDetails) principal).getUsername(); // 유저 닉네임 반환
         } else if (principal instanceof String) {
             return (String) principal; // principal이 문자열일 경우 (ex: JWT 인증 시)
         }

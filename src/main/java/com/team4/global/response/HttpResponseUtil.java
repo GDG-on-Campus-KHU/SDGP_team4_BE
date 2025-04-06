@@ -16,7 +16,7 @@ public class HttpResponseUtil {
 
     public static void setSuccessResponse(HttpServletResponse response, HttpStatus httpStatus, Object body)
             throws IOException {
-        String responseBody = objectMapper.writeValueAsString(ApiResponse.ok(body));
+        String responseBody = objectMapper.writeValueAsString(CommonResponse.ok(body));
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(httpStatus.value());
         response.setCharacterEncoding("UTF-8");
