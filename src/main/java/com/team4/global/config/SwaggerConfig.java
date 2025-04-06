@@ -59,7 +59,18 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("GDG_Project")
-                .description("hello")
+                .description("""
+                        ## Swagger 이용방법
+                        
+                        - 해당 페이지는 gdg 사이드 프로젝트 swagger페이지입니다. 
+                        - 에러나 문제가 발생한다면 곧바로 노션이나 카톡으로 에러이슈를 말씀해주세요.
+                        - uri는 꼭 `/api/v1`으로 시작하며, Restful api를 지향합니다.
+                        - `/api/v1/auth/**` 외에는 모두 인증/인가를 수행합니다.
+                        
+                        ### 인증인가 방법
+                        - Swagger에서는 오른쪽에 보이는 Authorize에 토큰값만 넣어주면 됩니다.
+                        - 실제 토큰검증은 요청 헤더에 `Authorization: Bearer {token}` 형식으로 요청해주시면 됩니다.
+                        """)
                 .version("1.0.0");
     }
 }
