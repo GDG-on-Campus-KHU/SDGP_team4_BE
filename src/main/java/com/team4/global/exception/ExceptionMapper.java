@@ -3,6 +3,8 @@ package com.team4.global.exception;
 import com.team4.domain.member.exception.LoginFailureException;
 import com.team4.domain.member.exception.MemberDuplicatedException;
 import com.team4.domain.member.exception.MemberNotFoundException;
+import com.team4.domain.travel.exception.TravelAuthException;
+import com.team4.domain.travel.exception.TravelNotFoundException;
 import com.team4.global.jwt.JwtException;
 import org.springframework.http.HttpStatus;
 
@@ -16,6 +18,7 @@ public class ExceptionMapper { // 예외 객체 -> 예외 상태로 바꿔주는
     static {
         setUpAuthException();
         setUpMemberException();
+        setUpTravelException();
     }
 
     private static void setUpMemberException() {
@@ -23,7 +26,6 @@ public class ExceptionMapper { // 예외 객체 -> 예외 상태로 바꿔주는
                 ExceptionSituation.of("해당 사용자가 존재하지 않습니다.", HttpStatus.NOT_FOUND, 1000));
         mapper.put(MemberDuplicatedException.class,
                 ExceptionSituation.of("이미 존재하는 닉네임입니다..", HttpStatus.CONFLICT, 1001));
-
     }
 
     private static void setUpAuthException() {
@@ -32,6 +34,14 @@ public class ExceptionMapper { // 예외 객체 -> 예외 상태로 바꿔주는
         mapper.put(LoginFailureException.class,
                 ExceptionSituation.of("로그인에 실패했습니다.", HttpStatus.BAD_REQUEST, 9001));
     }
+
+    private static void setUpTravelException() {
+        mapper.put(TravelNotFoundException.class,
+                ExceptionSituation.of("해당 여행정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND, 2001));
+        mapper.put(TravelAuthException.class,
+                ExceptionSituation.of("여행정보에 접근할 권한이 없습니다.", HttpStatus.BAD_REQUEST, 2002));
+    }
+
 
     public static ExceptionSituation getSituationOf(Exception exception) {
         return mapper.get(exception.getClass());
