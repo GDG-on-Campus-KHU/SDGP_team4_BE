@@ -8,7 +8,7 @@ public record LoginRequest(
         @Schema(description = "닉네임", example = "nickname")
         @NotBlank(message = "닉네임은 필수입니다.")
         String nickname,
-        @Schema(description = "비밀번호", example = "password")
+        @Schema(description = "비밀번호", example = "password1!")
         @NotBlank(message = "비밀번호는 필수입니다.")
         String password
 ) {

@@ -1,5 +1,6 @@
 package com.team4.domain.member.domain;
 
+import com.team4.domain.member.dto.MemberInfoDto;
 import com.team4.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -37,5 +38,11 @@ public class Member extends BaseEntity {
 
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public Member update(MemberInfoDto memberInfoDto) {
+        this.nickname = memberInfoDto.nickname();
+        this.region = memberInfoDto.region();
+        return this;
     }
 }
