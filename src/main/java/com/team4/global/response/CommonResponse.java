@@ -20,6 +20,10 @@ public record CommonResponse<T> (@Schema(example = "data status") String message
         return new CommonResponse<>("update", result);
     }
 
+    public static <T> CommonResponse<T> delete() {
+        return new CommonResponse<>("delete", null);
+    }
+
     public static <T> CommonResponse<T> delete(T result) {
         return new CommonResponse<>("delete", result);
     }

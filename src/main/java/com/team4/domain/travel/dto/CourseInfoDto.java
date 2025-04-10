@@ -18,7 +18,7 @@ public record CourseInfoDto (
     public static CourseInfoDto of(Course course) {
         return CourseInfoDto.builder()
                 .id(course.getId())
-                .nextId(course.getNextId().getId())
+                .nextId(course.getNextId() != null ? course.getNextId().getId() : null)
                 .courseDate(course.getCourseDate())
                 .moveTime(course.getMoveTime())
                 .name(course.getName())

@@ -53,7 +53,7 @@ public class AuthController {
             
             - 회원 가입 성공 시, `200` 유저의 정보와 토큰(access, refresh)를 반환합니다.
                 - 회원가입과 동시에 로그인까지 수행하도록 합니다.
-            - 이메일이 중복될 경우, `409` 에러를 반환합니다.
+            - 닉네임 중복될 경우, `409` 에러를 반환합니다.
             """)
     @ApiResponse(
             responseCode = "200",
@@ -126,7 +126,7 @@ public class AuthController {
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = CommonException.class),
-                    examples = @ExampleObject(value = "{\n  \"message\": \"이미 사용중인 닉네임입니다.\"\n, \n  \"errorCode\": \"1001\"}")
+                    examples = @ExampleObject(value = "{\n  \"message\": \"이미 사용중인 닉네임입니다.\"\n, \n  \"errorCode\": \"1002\"}")
             )
     )
     public ResponseEntity<CommonResponse<Void>> validateNickname(@RequestParam String nickname) {

@@ -1,5 +1,7 @@
 package com.team4.domain.post.domain;
 
+import com.team4.domain.post.dto.PostSimpleDto;
+import com.team4.domain.post.dto.PostUpdateDto;
 import com.team4.domain.travel.domain.Travel;
 import com.team4.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -31,5 +33,19 @@ public class Post extends BaseEntity {
         this.title = title;
         this.description = description;
         this.likeCount = likeCount;
+    }
+
+    public Post update(PostUpdateDto postDto) {
+        this.title = postDto.title();
+        this.description = postDto.description();
+        return this;
+    }
+
+    public void downLike() {
+        this.likeCount--;
+    }
+
+    public void upLike() {
+        this.likeCount++;
     }
 }

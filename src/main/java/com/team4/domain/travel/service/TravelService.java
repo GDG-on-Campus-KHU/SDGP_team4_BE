@@ -3,6 +3,7 @@ package com.team4.domain.travel.service;
 import com.team4.domain.member.dao.MemberRepository;
 import com.team4.domain.member.domain.Member;
 import com.team4.domain.member.exception.MemberNotFoundException;
+import com.team4.domain.post.dao.PostRepository;
 import com.team4.domain.post.domain.Post;
 import com.team4.domain.post.dto.PostCreateDto;
 import com.team4.domain.post.dto.PostInfoDto;
@@ -29,6 +30,7 @@ public class TravelService {
     private final MemberRepository memberRepository;
     private final TravelRepository travelRepository;
     private final CourseRepository courseRepository;
+    private final PostRepository postRepository;
 
     public Long createTravel(String nickname, TravelCreateDto travelCreateDto) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
@@ -73,25 +75,25 @@ public class TravelService {
         return TravelCourseInfoDto.of(travel, courseRepository.saveAll(courses));
     }
 
-    public Long deleteTravel(String nickname, Long travelId) {
+    public void deleteTravel(String nickname, Long travelId) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         Travel travel = travelRepository.findById(travelId).orElseThrow(TravelNotFoundException::new);
         if(!travel.getMember().getMemberId().equals(member.getMemberId()))
             throw new TravelAuthException();
 
         travelRepository.deleteById(travel.getId());
-        return travelId;
     }
 
+    @Transactional
     public PostInfoDto switchTravelToPost(Long travelId, String nickname, PostCreateDto postCreateDto) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         Travel travel = travelRepository.findById(travelId).orElseThrow(TravelNotFoundException::new);
         if(!travel.getMember().getMemberId().equals(member.getMemberId()))
             throw new TravelAuthException();
 
-        Post post = PostCreateDto.toEntity(postCreateDto);
+        Post post = postRepository.save(PostCreateDto.toEntity(postCreateDto, travel));
         travel.updatePost(post);
 
-        return new PostInfoDto();
+        return PostInfoDto.of(post, travel, member);
     }
 }

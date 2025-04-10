@@ -1,6 +1,7 @@
-package com.team4.domain.like_post.domain;
+package com.team4.domain.post.domain;
 
 import com.team4.domain.member.domain.Member;
+import com.team4.domain.post.domain.Post;
 import com.team4.domain.travel.domain.Travel;
 import com.team4.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -19,16 +20,16 @@ public class LikePost extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "travel_id")
-    private Travel travel;
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
     @Builder
-    public LikePost(Member member, Travel travel) {
+    public LikePost(Member member, Post post) {
         this.member = member;
-        this.travel = travel;
+        this.post = post;
     }
 }

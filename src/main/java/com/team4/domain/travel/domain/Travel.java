@@ -71,7 +71,8 @@ public class Travel extends BaseEntity {
     }
 
     public void setCourseList(List<Course> courses) {
-        this.courseList = courses;
+        this.courseList.clear();
+        this.courseList.addAll(courses);
     }
 
     public void updatePost(Post post) {
@@ -79,4 +80,8 @@ public class Travel extends BaseEntity {
         this.isPost = true;
     }
 
+    public void offPost() {
+        this.post = null;
+        this.isPost = false;
+    }
 }
