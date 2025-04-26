@@ -1,0 +1,66 @@
+package com.team4.feedback.service;
+
+
+import com.team4.feedback.entity.FeedbackType;
+import com.team4.feedback.entity.PlaceFeedback;
+import com.team4.feedback.repository.PlaceFeedbackRepository;
+import com.team4.member.entity.Member;
+import com.team4.member.repository.MemberRepository;
+import com.team4.place.entity.Place;
+import com.team4.place.repository.PlaceRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class PlaceFeedbackService {
+
+    private final PlaceRepository placeRepository;
+    private final PlaceFeedbackRepository feedbackRepository;
+    private final MemberRepository memberRepository;
+
+    public Map<String, Object> getFeedbackSummary(int placeId, int memberId) {
+        Place place = placeRepository.findById(placeId)
+                .orElseThrow(() -> new IllegalArgumentException("Place not found"));
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("bestCount", feedbackRepository.countByPlaceAndFeedbackType(place, FeedbackType.BEST));
+        result.put("goodCount", feedbackRepository.countByPlaceAndFeedbackType(place, FeedbackType.GOOD));
+        result.put("sosoCount", feedbackRepository.countByPlaceAndFeedbackType(place, FeedbackType.SOSO));
+        result.put("badCount", feedbackRepository.countByPlaceAndFeedbackType(place, FeedbackType.BAD));
+
+        feedbackRepository.findByPlaceAndMember(place, member)
+                .ifPresent(feedback -> result.put("myFeedback", feedback.getFeedbackType().name()));
+
+        return result;
+    }
+
+    public void addOrUpdateFeedback(int placeId, int memberId, FeedbackType feedbackType) {
+        Place place = placeRepository.findById(placeId)
+                .orElseThrow(() -> new IllegalArgumentException("Place not found"));
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        PlaceFeedback feedback = feedbackRepository.findByPlaceAndMember(place, member)
+                .orElse(new PlaceFeedback(place, member, feedbackType));
+
+        feedbackRepository.save(feedback);
+    }
+
+    public void deleteFeedback(int placeId, int memberId) {
+        Place place = placeRepository.findById(placeId)
+                .orElseThrow(() -> new IllegalArgumentException("Place not found"));
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        feedbackRepository.findByPlaceAndMember(place, member)
+                .ifPresent(feedbackRepository::delete);
+    }
+}
