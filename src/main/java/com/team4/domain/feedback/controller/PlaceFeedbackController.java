@@ -1,8 +1,8 @@
-package com.team4.feedback.controller;
+package com.team4.domain.feedback.controller;
 
 
-import com.team4.feedback.entity.FeedbackType;
-import com.team4.feedback.service.PlaceFeedbackService;
+import com.team4.domain.feedback.entity.FeedbackType;
+import com.team4.domain.feedback.service.PlaceFeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

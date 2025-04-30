@@ -1,10 +1,10 @@
-package com.team4.feedback.repository;
+package com.team4.domain.feedback.repository;
 
 
-import com.team4.feedback.entity.FeedbackType;
-import com.team4.feedback.entity.PlaceFeedback;
-import com.team4.member.entity.Member;
-import com.team4.place.entity.Place;
+import com.team4.domain.feedback.entity.FeedbackType;
+import com.team4.domain.feedback.entity.PlaceFeedback;
+import com.team4.domain.member.entity.Member;
+import com.team4.domain.place.entity.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

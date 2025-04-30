@@ -1,8 +1,8 @@
-package com.team4.comment.controller;
+package com.team4.domain.comment.controller;
 
-import com.team4.comment.dto.CommentDto;
-import com.team4.comment.dto.CommentRequestDto;
-import com.team4.comment.service.CommentService;
+import com.team4.domain.comment.dto.CommentDto;
+import com.team4.domain.comment.dto.CommentRequestDto;
+import com.team4.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
-package com.team4.place.repository;
+package com.team4.domain.place.repository;
 
-import com.team4.place.entity.Place;
+import com.team4.domain.place.entity.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

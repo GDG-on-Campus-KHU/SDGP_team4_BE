@@ -1,10 +1,10 @@
-package com.team4.place.service;
+package com.team4.domain.place.service;
 
-import com.team4.place.dto.PlaceDetailDto;
-import com.team4.map.dto.MapPinDto;
-import com.team4.place.dto.PlaceRequestDto;
-import com.team4.place.entity.Place;
-import com.team4.place.repository.PlaceRepository;
+import com.team4.domain.place.dto.PlaceDetailDto;
+import com.team4.domain.map.dto.MapPinDto;
+import com.team4.domain.place.dto.PlaceRequestDto;
+import com.team4.domain.place.entity.Place;
+import com.team4.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

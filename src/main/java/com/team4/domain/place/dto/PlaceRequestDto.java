@@ -1,4 +1,4 @@
-package com.team4.place.dto;
+package com.team4.domain.place.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

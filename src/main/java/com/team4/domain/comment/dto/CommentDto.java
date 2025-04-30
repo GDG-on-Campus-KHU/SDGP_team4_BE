@@ -1,6 +1,6 @@
-package com.team4.comment.dto;
+package com.team4.domain.comment.dto;
 
-import com.team4.comment.entity.Comment;
+import com.team4.domain.comment.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-package com.team4.comment.repository;
+package com.team4.domain.comment.repository;
 
-import com.team4.comment.entity.Comment;
+import com.team4.domain.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

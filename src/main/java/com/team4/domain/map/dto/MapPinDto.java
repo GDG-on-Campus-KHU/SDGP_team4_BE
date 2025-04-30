@@ -1,6 +1,6 @@
-package com.team4.map.dto;
+package com.team4.domain.map.dto;
 
-import com.team4.place.entity.Place;
+import com.team4.domain.place.entity.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

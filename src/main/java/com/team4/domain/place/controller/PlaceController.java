@@ -1,10 +1,10 @@
-package com.team4.place.controller;
+package com.team4.domain.place.controller;
 
-import com.team4.comment.dto.CommentDto;
-import com.team4.comment.service.CommentService;
-import com.team4.place.dto.PlaceDetailDto;
-import com.team4.place.dto.PlaceRequestDto;
-import com.team4.place.service.PlaceService;
+import com.team4.domain.comment.dto.CommentDto;
+import com.team4.domain.comment.service.CommentService;
+import com.team4.domain.place.dto.PlaceDetailDto;
+import com.team4.domain.place.dto.PlaceRequestDto;
+import com.team4.domain.place.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

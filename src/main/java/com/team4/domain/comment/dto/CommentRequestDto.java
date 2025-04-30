@@ -1,4 +1,4 @@
-package com.team4.comment.dto;
+package com.team4.domain.comment.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

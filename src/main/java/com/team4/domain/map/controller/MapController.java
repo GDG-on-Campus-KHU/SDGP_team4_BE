@@ -1,17 +1,19 @@
-package com.team4.map.controller;
+package com.team4.domain.map.controller;
 
-import com.team4.comment.dto.CommentDto;
-import com.team4.map.service.MapService;
-import com.team4.place.dto.PlaceDetailDto;
-import com.team4.map.dto.MapPinDto;
-import com.team4.place.dto.PlaceRequestDto;
-import com.team4.place.service.PlaceService;
-import com.team4.comment.service.CommentService;
+import com.team4.domain.map.service.MapService;
+import com.team4.domain.map.dto.MapPinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+/**
+ * 지도 API
+ *
+ * 1.
+ *
+ */
 
 @RestController
 @RequestMapping("/api/map")

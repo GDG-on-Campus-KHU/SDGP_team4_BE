@@ -1,13 +1,13 @@
-package com.team4.comment.service;
+package com.team4.domain.comment.service;
 
-import com.team4.comment.dto.CommentDto;
-import com.team4.comment.dto.CommentRequestDto;
-import com.team4.comment.entity.Comment;
-import com.team4.member.entity.Member;
-import com.team4.place.entity.Place;
-import com.team4.comment.repository.CommentRepository;
-import com.team4.member.repository.MemberRepository;
-import com.team4.place.repository.PlaceRepository;
+import com.team4.domain.comment.dto.CommentDto;
+import com.team4.domain.comment.dto.CommentRequestDto;
+import com.team4.domain.comment.entity.Comment;
+import com.team4.domain.member.entity.Member;
+import com.team4.domain.place.entity.Place;
+import com.team4.domain.comment.repository.CommentRepository;
+import com.team4.domain.member.repository.MemberRepository;
+import com.team4.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

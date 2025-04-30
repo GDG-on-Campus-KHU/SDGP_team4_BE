@@ -1,13 +1,13 @@
-package com.team4.feedback.service;
+package com.team4.domain.feedback.service;
 
 
-import com.team4.feedback.entity.FeedbackType;
-import com.team4.feedback.entity.PlaceFeedback;
-import com.team4.feedback.repository.PlaceFeedbackRepository;
-import com.team4.member.entity.Member;
-import com.team4.member.repository.MemberRepository;
-import com.team4.place.entity.Place;
-import com.team4.place.repository.PlaceRepository;
+import com.team4.domain.feedback.entity.FeedbackType;
+import com.team4.domain.feedback.entity.PlaceFeedback;
+import com.team4.domain.feedback.repository.PlaceFeedbackRepository;
+import com.team4.domain.member.entity.Member;
+import com.team4.domain.member.repository.MemberRepository;
+import com.team4.domain.place.entity.Place;
+import com.team4.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

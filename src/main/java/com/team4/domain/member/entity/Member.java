@@ -1,6 +1,6 @@
-package com.team4.member.entity;
+package com.team4.domain.member.entity;
 
-import com.team4.comment.entity.Comment;
+import com.team4.domain.comment.entity.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
 

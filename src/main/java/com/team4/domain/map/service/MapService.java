@@ -1,8 +1,8 @@
-package com.team4.map.service;
+package com.team4.domain.map.service;
 
-import com.team4.map.dto.MapPinDto;
-import com.team4.place.entity.Place;
-import com.team4.place.repository.PlaceRepository;
+import com.team4.domain.map.dto.MapPinDto;
+import com.team4.domain.place.entity.Place;
+import com.team4.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

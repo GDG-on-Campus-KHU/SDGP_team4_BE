@@ -1,7 +1,7 @@
-package com.team4.feedback.entity;
+package com.team4.domain.feedback.entity;
 
-import com.team4.member.entity.Member;
-import com.team4.place.entity.Place;
+import com.team4.domain.member.entity.Member;
+import com.team4.domain.place.entity.Place;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

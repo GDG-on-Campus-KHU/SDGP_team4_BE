@@ -1,6 +1,6 @@
-package com.team4.member.repository;
+package com.team4.domain.member.repository;
 
-import com.team4.member.entity.Member;
+import com.team4.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
