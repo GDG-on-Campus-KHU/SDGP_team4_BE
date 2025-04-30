@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentRequestDto {
 
-    private int commentId;
-    private int placeId;
-    private int memberId;
+    private Long commentId;
+    private Long placeId;
+    private Long memberId;
     private boolean islocal;
     private String comment;
 

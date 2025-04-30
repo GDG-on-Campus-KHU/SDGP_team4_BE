@@ -1,6 +1,6 @@
 package com.team4.domain.feedback.entity;
 
-import com.team4.domain.member.entity.Member;
+import com.team4.domain.member.domain.Member;
 import com.team4.domain.place.entity.Place;
 import jakarta.persistence.*;
 import lombok.Getter;

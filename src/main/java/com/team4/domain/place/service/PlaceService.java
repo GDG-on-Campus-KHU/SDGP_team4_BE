@@ -19,7 +19,7 @@ public class PlaceService {
     private final PlaceRepository placeRepository;
 
     @Transactional(readOnly = true)
-    public PlaceDetailDto getPlaceDetail(int placeId) {
+    public PlaceDetailDto getPlaceDetail(Long placeId) {
         return placeRepository.findById(placeId)
                 .map(PlaceDetailDto::fromEntity)
                 .orElse(null);

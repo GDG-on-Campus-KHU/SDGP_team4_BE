@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CommentRepository extends JpaRepository<Comment, Integer> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Comment> findByPlace_PlaceId(int placeId);
-    List<Comment> findByPlace_PlaceIdAndIsLocal(int placeId, boolean isLocal);
+    List<Comment> findByPlace_PlaceId(Long placeId);
+    List<Comment> findByPlace_PlaceIdAndIsLocal(Long placeId, boolean isLocal);
 }

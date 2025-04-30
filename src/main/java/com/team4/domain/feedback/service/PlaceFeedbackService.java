@@ -4,8 +4,8 @@ package com.team4.domain.feedback.service;
 import com.team4.domain.feedback.entity.FeedbackType;
 import com.team4.domain.feedback.entity.PlaceFeedback;
 import com.team4.domain.feedback.repository.PlaceFeedbackRepository;
-import com.team4.domain.member.entity.Member;
-import com.team4.domain.member.repository.MemberRepository;
+import com.team4.domain.member.dao.MemberRepository;
+import com.team4.domain.member.domain.Member;
 import com.team4.domain.place.entity.Place;
 import com.team4.domain.place.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class PlaceFeedbackService {
     private final PlaceFeedbackRepository feedbackRepository;
     private final MemberRepository memberRepository;
 
-    public Map<String, Object> getFeedbackSummary(int placeId, int memberId) {
+    public Map<String, Object> getFeedbackSummary(Long placeId, Long memberId) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
         Member member = memberRepository.findById(memberId)
@@ -42,7 +42,7 @@ public class PlaceFeedbackService {
         return result;
     }
 
-    public void addOrUpdateFeedback(int placeId, int memberId, FeedbackType feedbackType) {
+    public void addOrUpdateFeedback(Long placeId, Long memberId, FeedbackType feedbackType) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
         Member member = memberRepository.findById(memberId)
@@ -54,7 +54,7 @@ public class PlaceFeedbackService {
         feedbackRepository.save(feedback);
     }
 
-    public void deleteFeedback(int placeId, int memberId) {
+    public void deleteFeedback(Long placeId, Long memberId) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
         Member member = memberRepository.findById(memberId)

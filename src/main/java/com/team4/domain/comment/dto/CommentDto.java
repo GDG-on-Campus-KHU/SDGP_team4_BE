@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CommentDto {
 
-    private int commentId;
-    private int placeId;
+    private Long commentId;
+    private Long placeId;
     private String nickname;
     private boolean local;
     private String comment;

@@ -1,11 +1,15 @@
 package com.team4.domain.member.domain;
 
+import com.team4.domain.comment.entity.Comment;
 import com.team4.domain.member.dto.MemberInfoDto;
 import com.team4.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,4 +49,8 @@ public class Member extends BaseEntity {
         this.region = memberInfoDto.region();
         return this;
     }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
 }

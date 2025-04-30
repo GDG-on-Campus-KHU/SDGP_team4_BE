@@ -1,6 +1,6 @@
 package com.team4.domain.comment.entity;
 
-import com.team4.domain.member.entity.Member;
+import com.team4.domain.member.domain.Member;
 import com.team4.domain.place.entity.Place;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +15,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
-    private int commentId;
+    private Long commentId;
 
     @ManyToOne
     @JoinColumn(name = "place_id", nullable = false)

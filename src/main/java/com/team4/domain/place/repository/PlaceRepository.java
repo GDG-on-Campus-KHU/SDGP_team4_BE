@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface PlaceRepository extends JpaRepository<Place, Integer> {
+public interface PlaceRepository extends JpaRepository<Place, Long> {
 
     @Query("SELECT p FROM Place p " +
             "WHERE p.latitude BETWEEN :minLat AND :maxLat " +

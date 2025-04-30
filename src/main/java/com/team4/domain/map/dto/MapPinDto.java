@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MapPinDto {
-    private int placeId;
+    private Long placeId;
     private double latitude;
     private double longitude;
     private int commentsCnt;

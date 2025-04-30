@@ -7,16 +7,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PlaceDetailDto {
-    private int placeId;
+    private Long placeId;
     private String name;
     private String address;
     private double latitude;
     private double longitude;
     private int commentsCnt;
-    private int bestCnt;
-    private int goodCnt;
-    private int sosoCnt;
-    private int badCnt;
 
     public static PlaceDetailDto fromEntity(Place place) {
         return new PlaceDetailDto(
@@ -25,11 +21,7 @@ public class PlaceDetailDto {
                 place.getAddress(),
                 place.getLatitude(),
                 place.getLongitude(),
-                place.getCommentsCnt(),
-                place.getBestCnt(),
-                place.getGoodCnt(),
-                place.getSosoCnt(),
-                place.getBadCnt()
+                place.getCommentsCnt()
         );
     }
 }
