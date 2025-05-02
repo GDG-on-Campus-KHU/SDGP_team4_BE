@@ -31,6 +31,9 @@ public class Member extends BaseEntity {
 
     private String refreshToken;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     @Builder
     public Member(String nickname, String password,
                   String region, String refreshToken) {
@@ -49,8 +52,5 @@ public class Member extends BaseEntity {
         this.region = memberInfoDto.region();
         return this;
     }
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
 
 }
