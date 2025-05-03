@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "Place", description = "장소 상세 조회 및 댓글, 등록 API")
 @RestController
-@RequestMapping("/api/places")
+@RequestMapping("/api/v1/places")
 @RequiredArgsConstructor
 public class PlaceController {
 

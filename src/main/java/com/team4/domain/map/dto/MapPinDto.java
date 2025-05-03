@@ -11,13 +11,27 @@ public class MapPinDto {
     private double latitude;
     private double longitude;
     private int commentsCnt;
+    private int bestCount;
+    private int goodCount;
+    private int sosoCount;
+    private int badCount;
 
-    public static MapPinDto fromEntity(Place place) {
+    public static MapPinDto fromEntity(
+            Place place,
+            int bestCount,
+            int goodCount,
+            int sosoCount,
+            int badCount
+    ) {
         return new MapPinDto(
                 place.getPlaceId(),
                 place.getLatitude(),
                 place.getLongitude(),
-                place.getCommentsCnt()
+                place.getCommentsCnt(),
+                bestCount,
+                goodCount,
+                sosoCount,
+                badCount
         );
     }
 }
