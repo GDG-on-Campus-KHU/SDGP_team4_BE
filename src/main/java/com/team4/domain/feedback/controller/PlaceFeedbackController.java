@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Tag(name = "Feedback", description = "장소 피드백(좋아요/별점) 관리 API")
 @RestController
-@RequestMapping("/api/places/{placeId}/feedbacks")
+@RequestMapping("/api/v1/places/{placeId}/feedbacks")
 @RequiredArgsConstructor
 public class PlaceFeedbackController {
 
