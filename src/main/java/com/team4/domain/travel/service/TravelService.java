@@ -91,7 +91,7 @@ public class TravelService {
         if(!travel.getMember().getMemberId().equals(member.getMemberId()))
             throw new TravelAuthException();
 
-        Post post = postRepository.save(PostCreateDto.toEntity(postCreateDto, travel));
+        Post post = postRepository.save(PostCreateDto.toEntity(postCreateDto, travel, nickname));
         travel.updatePost(post);
 
         return PostInfoDto.of(post, travel, member);

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public record TravelInfoDto(
         Long travelId,
         String title,
+        String area,
         String thumbnail,
         LocalDate startDate,
         LocalDate endDate,
@@ -19,6 +20,7 @@ public record TravelInfoDto(
         return TravelInfoDto.builder()
                 .travelId(travel.getId())
                 .title(travel.getTitle())
+                .area(travel.getArea())
                 .thumbnail(travel.getThumbnail())
                 .startDate(travel.getStartDate())
                 .endDate(travel.getEndDate())

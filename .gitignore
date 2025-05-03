@@ -38,3 +38,5 @@ out/
 
 mysql/data/
 src/main/resources/application-dev.yml
+src/main/resources/application-secret.yml
+src/main/resources/model-block-455013-s4-256166007e77.json

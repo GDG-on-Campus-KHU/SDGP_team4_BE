@@ -17,7 +17,7 @@ import java.util.List;
  *
  */
 
-@Tag(name = "Map", description = "지도 화면 관련 API")
+@Tag(name = "Map")
 @RestController
 @RequestMapping("/api/map")
 @RequiredArgsConstructor

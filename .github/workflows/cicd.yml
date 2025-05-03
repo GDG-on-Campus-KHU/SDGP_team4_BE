@@ -28,6 +28,13 @@ jobs:
           echo "${{ secrets.YML }}" > ./application-dev.yml
         shell: bash
 
+      - name: make gcs json key
+        run: |
+          cd ./src/main/resources
+          touch ./model-block-455013-s4-256166007e77.json
+          echo "${{ secrets.GCS_KEY }}" | base64 --decode > model-block-455013-s4-256166007e77.json
+        shell: bash
+
       - name: Upload docker-compose.yml
         run: |
           echo "${{ secrets.VM_SSH_PRIVATE_KEY }}" > private_key.pem

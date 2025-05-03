@@ -56,6 +56,8 @@ public class PostController {
             
             - `postId`: 게시글 pk
             - `title`: 게시글 제목
+            - `nickname`: 게시글 작성자
+            - `date`: 게시글 작성일
             - `description`: 게시글 내용
             - `likeCount`: 좋아요 수
             - `isMyLike`: 좋아요 여부(true=좋아요 누름 / false=안누름)

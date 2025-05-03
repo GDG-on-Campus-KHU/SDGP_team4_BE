@@ -24,10 +24,10 @@ public class PlaceFeedbackService {
     private final PlaceFeedbackRepository feedbackRepository;
     private final MemberRepository memberRepository;
 
-    public Map<String, Object> getFeedbackSummary(Long placeId, Long memberId) {
+    public Map<String, Object> getFeedbackSummary(Long placeId, String nickname) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         Map<String, Object> result = new HashMap<>();
@@ -42,10 +42,10 @@ public class PlaceFeedbackService {
         return result;
     }
 
-    public void addOrUpdateFeedback(Long placeId, Long memberId, FeedbackType feedbackType) {
+    public void addOrUpdateFeedback(Long placeId, String nickname, FeedbackType feedbackType) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         PlaceFeedback feedback = feedbackRepository.findByPlaceAndMember(place, member)
@@ -54,10 +54,10 @@ public class PlaceFeedbackService {
         feedbackRepository.save(feedback);
     }
 
-    public void deleteFeedback(Long placeId, Long memberId) {
+    public void deleteFeedback(Long placeId, String nickname) {
         Place place = placeRepository.findById(placeId)
                 .orElseThrow(() -> new IllegalArgumentException("Place not found"));
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         feedbackRepository.findByPlaceAndMember(place, member)

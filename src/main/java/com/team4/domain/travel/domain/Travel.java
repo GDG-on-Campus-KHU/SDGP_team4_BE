@@ -44,14 +44,16 @@ public class Travel extends BaseEntity {
     private List<Course> courseList = new ArrayList<>();
 
     private String title;
+    private String area;
     private String thumbnail;
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean isPost = false; // -> travel의 게시글 여부 확인 시, post쿼리로 확인하지 않기 위해서.
 
     @Builder
-    public Travel(Long id, Member member, Post post, String title, String thumbnail,
-                  LocalDate startDate, LocalDate endDate, boolean isPost) {
+    public Travel(Long id, Member member, Post post, String title,
+                  String thumbnail, LocalDate startDate, LocalDate endDate,
+                  boolean isPost, String area) {
         this.id = id;
         this.member = member;
         this.post = post;
@@ -59,11 +61,13 @@ public class Travel extends BaseEntity {
         this.thumbnail = thumbnail;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.area = area;
         this.isPost = isPost;
     }
 
     public Travel update(TravelCreateDto travelInfoDto) {
         this.title = travelInfoDto.title();
+        this.area = travelInfoDto.area();
         this.thumbnail = travelInfoDto.thumbnail();
         this.startDate = travelInfoDto.startDate();
         this.endDate = travelInfoDto.endDate();
