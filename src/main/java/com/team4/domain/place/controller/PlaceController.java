@@ -17,7 +17,7 @@ import java.util.List;
 
 @Tag(name = "Place")
 @RestController
-@RequestMapping("/api/places")
+@RequestMapping("/api/v1/places")
 @RequiredArgsConstructor
 public class PlaceController {
 

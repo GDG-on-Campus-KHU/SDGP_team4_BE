@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Tag(name = "Feedback")
 @RestController
-@RequestMapping("/api/places/{placeId}/feedbacks")
+@RequestMapping("/api/v1/places/{placeId}/feedbacks")
 @RequiredArgsConstructor
 public class PlaceFeedbackController {
 
