@@ -3,6 +3,7 @@ package com.team4.domain.feedback.controller;
 
 import com.team4.domain.feedback.entity.FeedbackType;
 import com.team4.domain.feedback.service.PlaceFeedbackService;
+import com.team4.global.jwt.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Tag(name = "Feedback", description = "장소 피드백(좋아요/별점) 관리 API")
+@Tag(name = "Feedback")
 @RestController
 @RequestMapping("/api/v1/places/{placeId}/feedbacks")
 @RequiredArgsConstructor
@@ -27,7 +28,6 @@ public class PlaceFeedbackController {
             description = """
             # 특정 장소에 대한 피드백 전체 집계 및 내가 남긴 피드백 조회
             - `placeId` 경로변수로 장소 ID 지정  
-            - `memberId` 쿼리파라미터로 로그인한 회원 ID 전달  
             ## 응답 필드  
             - `bestCount`, `goodCount`, `sosoCount`, `badCount` (각 피드백 유형별 개수)  
             - `myFeedback` (내가 남긴 피드백 유형, 없으면 해당 키 없음)  
@@ -38,10 +38,9 @@ public class PlaceFeedbackController {
             @ApiResponse(responseCode = "404", description = "해당 장소 또는 회원이 존재하지 않음")
     })
     public ResponseEntity<Map<String, Object>> getFeedbackSummary(
-            @PathVariable Long placeId,
-            @RequestParam Long memberId) {
-
-        Map<String, Object> result = feedbackService.getFeedbackSummary(placeId, memberId);
+            @PathVariable Long placeId) {
+        String nickname = JwtService.getLoginMemberNickname();
+        Map<String, Object> result = feedbackService.getFeedbackSummary(placeId, nickname);
         return ResponseEntity.ok(result);
     }
 
@@ -52,7 +51,6 @@ public class PlaceFeedbackController {
             description = """
             # 특정 장소에 대한 피드백을 등록하거나, 이미 있으면 수정합니다.
             - `placeId` 경로변수로 장소 ID  
-            - `memberId` 쿼리파라미터로 회원 ID  
             - `feedbackType` 쿼리파라미터로 피드백 유형 (BEST, GOOD, SOSO, BAD)  
             """
     )
@@ -63,10 +61,9 @@ public class PlaceFeedbackController {
     })
     public ResponseEntity<Void> addOrUpdateFeedback(
             @PathVariable Long placeId,
-            @RequestParam Long memberId,
             @RequestParam FeedbackType feedbackType) {
-
-        feedbackService.addOrUpdateFeedback(placeId, memberId, feedbackType);
+        String nickname = JwtService.getLoginMemberNickname();
+        feedbackService.addOrUpdateFeedback(placeId, nickname, feedbackType);
         return ResponseEntity.ok().build();
     }
 
@@ -76,7 +73,6 @@ public class PlaceFeedbackController {
             description = """
             # 특정 장소에 남긴 내 피드백을 삭제합니다.
             - `placeId` 경로변수로 장소 ID  
-            - `memberId` 쿼리파라미터로 회원 ID  
             """
     )
     @ApiResponses({
@@ -84,10 +80,9 @@ public class PlaceFeedbackController {
             @ApiResponse(responseCode = "404", description = "해당 장소 또는 회원이 존재하지 않음")
     })
     public ResponseEntity<Void> deleteFeedback(
-            @PathVariable Long placeId,
-            @RequestParam Long memberId) {
-
-        feedbackService.deleteFeedback(placeId, memberId);
+            @PathVariable Long placeId) {
+        String nickname = JwtService.getLoginMemberNickname();
+        feedbackService.deleteFeedback(placeId, nickname);
         return ResponseEntity.ok().build();
     }
 }

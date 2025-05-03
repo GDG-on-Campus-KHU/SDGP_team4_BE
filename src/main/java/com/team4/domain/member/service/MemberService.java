@@ -3,6 +3,7 @@ package com.team4.domain.member.service;
 import com.team4.domain.post.dao.LikePostRepository;
 import com.team4.domain.post.domain.LikePost;
 import com.team4.domain.post.dao.PostRepository;
+import com.team4.domain.post.domain.Post;
 import com.team4.domain.post.dto.PostSimpleDto;
 import com.team4.domain.travel.dao.CourseRepository;
 import com.team4.domain.travel.domain.Course;
@@ -75,10 +76,6 @@ public class MemberService {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         List<LikePost> likePosts = likePostRepository.findAllByMember(member);
 
-        Set<Long> likedPostIds = likePosts.stream()
-                .map(likePost -> likePost.getPost().getId())
-                .collect(Collectors.toSet());
-
         List<PostSimpleDto> postDtos = likePosts.stream()
                 .map(likePost -> PostSimpleDto.of(likePost.getPost()))
                 .collect(Collectors.toList());
@@ -88,5 +85,11 @@ public class MemberService {
         List<PostSimpleDto> pagedResult = postDtos.subList(start, end);
 
         return new PageImpl<>(pagedResult, pageable, postDtos.size());
+    }
+
+    public Page<PostSimpleDto> showMyPost(String nickname, Pageable pageable) {
+        Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
+        Page<Post> posts = postRepository.findAllByNickname(nickname, pageable);
+        return posts.map(PostSimpleDto::of);
     }
 }

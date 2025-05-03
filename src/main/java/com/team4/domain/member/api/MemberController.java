@@ -160,15 +160,19 @@ public class MemberController {
     }
 
     @GetMapping("/post")
-    @Operation(summary = "좋아요 게시글 전체 조회", description = """
-            # 좋아요 게시글 전체 조회
+    @Operation(summary = "나의 게시글 전체 조회", description = """
+            # 나의 게시글 전체 조회
                         
             회원이 좋아요한 게시글을 조회합니다.
             '게시글 전체 조회'와 동일한 데이터를 반환합니다.
+            
+            쿼리파라미터에 isLike=true -> 좋아요 표시한 게시글
+            아무것도 안넣거나 false일 경우 -> 내가 만든 게시글
               
             ### 쿼리파라미터
             - page: 페이지 번호 (default=0)
             - size: 페이지에 보여지는 수 (default=5)
+            - isLike: 좋아요 게시글 표시할건가? (default=false)
             
             ## 응답
             
@@ -176,6 +180,8 @@ public class MemberController {
             
             - `postId`: 게시글 pk
             - `title`: 게시글 제목
+            - `nickname`: 게시글 작성자
+            - `date`: 게시글 작성일
             - `description`: 게시글 내용
             - `likeCount`: 좋아요 수
             - `isMyLike`: 좋아요 여부(true=좋아요 누름 / false=안누름)
@@ -187,10 +193,14 @@ public class MemberController {
     )
     public ResponseEntity<CommonResponse<Page<PostSimpleDto>>> showMyPostLike(
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "5") int size
+            @RequestParam(value = "size", defaultValue = "5") int size,
+            @RequestParam(required = false, defaultValue = "false") boolean isLike
     ) {
         String nickname = JwtService.getLoginMemberNickname();
-        return ResponseEntity.ok(CommonResponse.ok(memberService.showMyPostLike(nickname, PageRequest.of(page, size))));
+        if(isLike) {
+            return ResponseEntity.ok(CommonResponse.ok(memberService.showMyPostLike(nickname, PageRequest.of(page, size))));
+        }
+        return ResponseEntity.ok(CommonResponse.ok(memberService.showMyPost(nickname, PageRequest.of(page, size))));
     }
 
 }

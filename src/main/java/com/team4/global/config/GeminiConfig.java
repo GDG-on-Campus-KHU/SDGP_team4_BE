@@ -14,7 +14,6 @@ public class GeminiConfig {
     public RestTemplate geminiRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add((request, body, execution) -> execution.execute(request, body));
-
         return restTemplate;
     }
 }

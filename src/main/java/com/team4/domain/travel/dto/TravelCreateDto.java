@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public record TravelCreateDto(
         String title,
+        String area,
         String thumbnail,
         LocalDate startDate,
         LocalDate endDate
@@ -15,6 +16,7 @@ public record TravelCreateDto(
         return Travel.builder()
                 .member(member)
                 .title(travelCreateDto.title)
+                .area(travelCreateDto.area)
                 .thumbnail(travelCreateDto.thumbnail)
                 .startDate(travelCreateDto.startDate)
                 .endDate(travelCreateDto.endDate)

@@ -27,7 +27,7 @@ public class PlaceService {
 
     @Transactional
     public PlaceDetailDto addPlace(PlaceRequestDto request) {
-        Place place = new Place(request.getName(), request.getAddress(), request.getLatitude(), request.getLongitude());
+        Place place = new Place(request.getName(), request.getAddress(), request.getLatitude(), request.getLongitude(), request.getImgUrls());
         Place savedPlace = placeRepository.save(place);
         return PlaceDetailDto.fromEntity(savedPlace);
     }

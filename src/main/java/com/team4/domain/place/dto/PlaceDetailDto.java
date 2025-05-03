@@ -4,6 +4,8 @@ import com.team4.domain.place.entity.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class PlaceDetailDto {
@@ -13,6 +15,7 @@ public class PlaceDetailDto {
     private double latitude;
     private double longitude;
     private int commentsCnt;
+    private List<String> imgUrls;
 
     public static PlaceDetailDto fromEntity(Place place) {
         return new PlaceDetailDto(
@@ -21,7 +24,8 @@ public class PlaceDetailDto {
                 place.getAddress(),
                 place.getLatitude(),
                 place.getLongitude(),
-                place.getCommentsCnt()
+                place.getCommentsCnt(),
+                place.getImgUrls()
         );
     }
 }

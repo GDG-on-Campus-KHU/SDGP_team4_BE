@@ -9,7 +9,6 @@ public class CommentRequestDto {
 
     private Long commentId;
     private Long placeId;
-    private Long memberId;
     private boolean islocal;
     private String comment;
 

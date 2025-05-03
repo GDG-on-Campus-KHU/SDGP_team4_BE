@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Place", description = "장소 상세 조회 및 댓글, 등록 API")
+@Tag(name = "Place")
 @RestController
 @RequestMapping("/api/v1/places")
 @RequiredArgsConstructor

@@ -2,12 +2,14 @@ package com.team4.domain.comment.service;
 
 import com.team4.domain.comment.dto.CommentDto;
 import com.team4.domain.comment.dto.CommentRequestDto;
+import com.team4.domain.comment.dto.CommentSummaryDto;
 import com.team4.domain.comment.entity.Comment;
 import com.team4.domain.member.dao.MemberRepository;
 import com.team4.domain.member.domain.Member;
 import com.team4.domain.place.entity.Place;
 import com.team4.domain.comment.repository.CommentRepository;
 import com.team4.domain.place.repository.PlaceRepository;
+import com.team4.global.gemini.GeminiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class CommentService {
     private final PlaceRepository placeRepository;
     private final MemberRepository memberRepository;
 
+    private final GeminiService geminiService;
+
     public List<CommentDto> getCommentsByPlace(Long placeId) {
         List<Comment> comments = commentRepository.findByPlace_PlaceId(placeId);
         return comments.stream()
@@ -38,17 +42,30 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public CommentDto addComment(CommentRequestDto request) {
+    public CommentDto addComment(CommentRequestDto request, String nickname) {
         Place place = placeRepository.findById(request.getPlaceId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found"));
 
-        Member member = memberRepository.findById(request.getMemberId())
+        Member member = memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found"));
 
         Comment comment = new Comment(place, member, request.getIslocal(), request.getComment());
         Comment savedComment = commentRepository.save(comment);
 
         return CommentDto.fromEntity((savedComment));
+    }
+
+    public CommentSummaryDto summaryComments(String prompt, Long placeId) {
+        List<Comment> comments = commentRepository.findByPlace_PlaceId(placeId);
+        // 댓글 본문만 추출해 줄 단위로 이어붙임
+        String commentText = comments.stream()
+                .map(Comment::getComment)
+                .collect(Collectors.joining("\n"));
+
+        // 프롬프트 + 댓글내용 전달
+        String fullPrompt = prompt + "\n\n" + commentText;
+
+        return new CommentSummaryDto(geminiService.getContents(fullPrompt));
     }
 
 }
