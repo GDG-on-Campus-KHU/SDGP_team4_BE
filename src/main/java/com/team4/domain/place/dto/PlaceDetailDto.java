@@ -25,7 +25,7 @@ public class PlaceDetailDto {
                 place.getLatitude(),
                 place.getLongitude(),
                 place.getCommentsCnt(),
-                place.getImgUrls()
+                place.getImgUrls().stream().toList()
         );
     }
 }
