@@ -24,7 +24,7 @@ public record PostInfoDto(
                                 .map(CourseInfoDto::of)
                                 .collect(Collectors.toList())
                 )
-                .imgUrls(post.getImgUrls())
+                .imgUrls(post.getImgUrls().stream().toList())
                 .isMine(travel.getMember().equals(member) ? true : false)
                 .build();
     }
