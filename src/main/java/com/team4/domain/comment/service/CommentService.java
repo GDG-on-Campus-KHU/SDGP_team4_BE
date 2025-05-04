@@ -13,6 +13,7 @@ import com.team4.global.gemini.GeminiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public CommentDto addComment(CommentRequestDto request, String nickname) {
         Place place = placeRepository.findById(request.getPlaceId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found"));
@@ -51,6 +53,7 @@ public class CommentService {
 
         Comment comment = new Comment(place, member, request.getIslocal(), request.getComment());
         Comment savedComment = commentRepository.save(comment);
+        place.commentsCntUp();
 
         return CommentDto.fromEntity((savedComment));
     }

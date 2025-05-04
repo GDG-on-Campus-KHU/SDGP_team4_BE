@@ -48,4 +48,8 @@ public class Place {
         this.commentsCnt = 0;
         this.imgUrls = imgUrls;
     }
+
+    public void commentsCntUp() {
+        this.commentsCnt++;
+    }
 }
