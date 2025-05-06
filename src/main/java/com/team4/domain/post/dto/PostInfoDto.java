@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public record PostInfoDto(
         PostSimpleDto postSimpleDto,
         List<CourseInfoDto> courseInfoDtos,
-        List<String> imgUrls,
         boolean isMine
 ) {
     public static PostInfoDto of(Post post, Travel travel, Member member) {
@@ -24,7 +23,6 @@ public record PostInfoDto(
                                 .map(CourseInfoDto::of)
                                 .collect(Collectors.toList())
                 )
-                .imgUrls(post.getImgUrls().stream().toList())
                 .isMine(travel.getMember().equals(member) ? true : false)
                 .build();
     }

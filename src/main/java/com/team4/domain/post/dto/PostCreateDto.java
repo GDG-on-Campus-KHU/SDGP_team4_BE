@@ -8,8 +8,7 @@ import java.util.List;
 
 public record PostCreateDto (
         String title,
-        String description,
-        List<String> imgUrls
+        String description
 ) {
     public static Post toEntity(PostCreateDto postCreateDto, Travel travel, String nickname) {
         return Post.builder()

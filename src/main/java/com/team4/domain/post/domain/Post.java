@@ -30,28 +30,21 @@ public class Post extends BaseEntity {
     private String nickname;
     private String description;
 
-    @ElementCollection
-    @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
-    @Column(name = "image_url", nullable = false)
-    private List<String> imgUrls = new ArrayList<>();
-
     private Long likeCount = 0L;
 
     @Builder
     public Post(Travel travel, String title, String description,
-                Long likeCount, String nickname, List<String> imgUrls) {
+                Long likeCount, String nickname) {
         this.travel = travel;
         this.title = title;
         this.description = description;
         this.likeCount = likeCount;
         this.nickname = nickname;
-        this.imgUrls = imgUrls;
     }
 
     public Post update(PostUpdateDto postDto) {
         this.title = postDto.title();
         this.description = postDto.description();
-        this.imgUrls = postDto.imgUrls();
         return this;
     }
 

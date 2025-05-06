@@ -4,7 +4,6 @@ import java.util.List;
 
 public record PostUpdateDto (
         String title,
-        String description,
-        List<String> imgUrls
+        String description
 ) {
 }
