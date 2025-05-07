@@ -72,6 +72,7 @@ public class MemberService {
         return TravelCourseInfoDto.of(travel, courseList);
     }
 
+    @Transactional
     public Page<PostSimpleDto> showMyPostLike(String nickname, Pageable pageable) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         List<LikePost> likePosts = likePostRepository.findAllByMember(member);

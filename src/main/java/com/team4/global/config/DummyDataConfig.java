@@ -76,7 +76,6 @@ public class DummyDataConfig implements CommandLineRunner {
                         .title("포스트 제목 " + i)
                         .nickname(member.getNickname())
                         .description("여행 내용 설명 " + i)
-                        .imgUrls(List.of("https://dummyimage.com/400x300/000/fff&text=img1", "https://dummyimage.com/400x300/000/fff&text=img2"))
                         .likeCount(0L)
                         .build();
                 postRepository.save(post);

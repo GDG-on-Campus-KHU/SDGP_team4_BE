@@ -1,6 +1,5 @@
 package com.team4.domain.post.domain;
 
-import com.team4.domain.post.dto.PostSimpleDto;
 import com.team4.domain.post.dto.PostUpdateDto;
 import com.team4.domain.travel.domain.Travel;
 import com.team4.global.entity.BaseEntity;
@@ -9,8 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "posts")
