@@ -12,4 +12,7 @@ public interface LikePostRepository extends JpaRepository<LikePost, Long> {
     List<LikePost> findAllByMember(Member member);
 
     Optional<LikePost> findByPost(Post post);
+
+    Optional<LikePost> findByPostAndMember(Post post, Member member);
+
 }

@@ -93,7 +93,7 @@ public class MemberService {
         Page<Post> posts = postRepository.findAllByNickname(nickname, pageable);
 
         return posts.map(post -> {
-            boolean isMyLike = likePostRepository.findByPost(post).isPresent();
+            boolean isMyLike = likePostRepository.findByPostAndMember(post, member).isPresent();
             return PostSimpleDto.of(post, isMyLike);
         });
     }

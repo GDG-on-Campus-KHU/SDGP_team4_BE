@@ -81,7 +81,7 @@ public class PostService {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
 
-        Optional<LikePost> likeStatus = likePostRepository.findByPost(post);
+        Optional<LikePost> likeStatus = likePostRepository.findByPostAndMember(post, member);
         if(likeStatus.isPresent()) {
             likePostRepository.delete(likeStatus.get());
             post.downLike();
