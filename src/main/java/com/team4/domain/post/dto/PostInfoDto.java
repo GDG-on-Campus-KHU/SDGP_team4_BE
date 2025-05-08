@@ -15,9 +15,9 @@ public record PostInfoDto(
         List<CourseInfoDto> courseInfoDtos,
         boolean isMine
 ) {
-    public static PostInfoDto of(Post post, Travel travel, Member member) {
+    public static PostInfoDto of(Post post, Travel travel, Member member, boolean like) {
         return PostInfoDto.builder()
-                .postSimpleDto(PostSimpleDto.of(post))
+                .postSimpleDto(PostSimpleDto.of(post, like))
                 .courseInfoDtos(
                         travel.getCourseList().stream()
                                 .map(CourseInfoDto::of)

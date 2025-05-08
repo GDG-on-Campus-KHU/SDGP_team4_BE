@@ -94,6 +94,6 @@ public class TravelService {
         Post post = postRepository.save(PostCreateDto.toEntity(postCreateDto, travel, nickname));
         travel.updatePost(post);
 
-        return PostInfoDto.of(post, travel, member);
+        return PostInfoDto.of(post, travel, member, false);
     }
 }

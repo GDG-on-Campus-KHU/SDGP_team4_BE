@@ -49,20 +49,27 @@ public class PostService {
 
     @Transactional
     public PostInfoDto showPostInfo(Long postId) {
+        String nickname = JwtService.getLoginMemberNickname();
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         Travel travel = travelRepository.findById(post.getTravel().getId()).orElseThrow(TravelNotFoundException::new);
-        Member member = memberRepository.findById(travel.getMember().getMemberId()).orElseThrow(MemberNotFoundException::new);
-        return PostInfoDto.of(post, travel, member);
+        Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
+        boolean like = likePostRepository.findByPostAndMember(post, member).isPresent();
+
+        return PostInfoDto.of(post, travel, member, like);
     }
 
     @Transactional
     public PostInfoDto editPostInfo(Long postId, PostUpdateDto postDto) {
         String nickname = JwtService.getLoginMemberNickname();
+        Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+
         if(!nickname.equals(post.getTravel().getMember().getNickname()))
             throw new PostAuthException();
         Post update = post.update(postDto);
-        return PostInfoDto.of(update, update.getTravel(), update.getTravel().getMember());
+        boolean like = likePostRepository.findByPostAndMember(post, member).isPresent();
+
+        return PostInfoDto.of(update, update.getTravel(), update.getTravel().getMember(), like);
     }
 
     @Transactional
