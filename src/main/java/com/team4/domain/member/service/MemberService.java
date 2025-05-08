@@ -91,6 +91,10 @@ public class MemberService {
     public Page<PostSimpleDto> showMyPost(String nickname, Pageable pageable) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(MemberNotFoundException::new);
         Page<Post> posts = postRepository.findAllByNickname(nickname, pageable);
-        return posts.map(PostSimpleDto::of);
+
+        return posts.map(post -> {
+            boolean isMyLike = likePostRepository.findByPost(post).isPresent();
+            return PostSimpleDto.of(post, isMyLike);
+        });
     }
 }

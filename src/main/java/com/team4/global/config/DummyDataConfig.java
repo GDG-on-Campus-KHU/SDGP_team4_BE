@@ -88,6 +88,7 @@ public class DummyDataConfig implements CommandLineRunner {
                         "장소 이름 " + i, "서울시 종로구", 37.572950 + i, 126.979357 + i,
                         List.of("https://dummyimage.com/400x300/aaa/fff&text=place" + i)
                 );
+                place.commentsCntUp();
                 placeRepository.save(place);
 
                 Comment comment = new Comment(place, member, true, "여기 진짜 좋더라구요!" + i);
