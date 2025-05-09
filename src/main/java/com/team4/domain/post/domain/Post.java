@@ -25,6 +25,9 @@ public class Post extends BaseEntity {
 
     private String title;
     private String nickname;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     private Long likeCount = 0L;
