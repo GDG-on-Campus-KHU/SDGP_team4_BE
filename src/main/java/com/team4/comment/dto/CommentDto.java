@@ -1,0 +1,27 @@
+package com.team4.comment.dto;
+
+import com.team4.comment.entity.Comment;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class CommentDto {
+
+    private int commentId;
+    private int placeId;
+    private String nickname;
+    private boolean local;
+    private String comment;
+
+
+    public static CommentDto fromEntity(Comment comment) {
+        return new CommentDto(
+                comment.getCommentId(),
+                comment.getPlace().getPlaceId(),
+                comment.getMember().getNickname(),
+                comment.isLocal(),
+                comment.getComment()
+        );
+    }
+}
